@@ -1,0 +1,2 @@
+uid:0,username:test,password:test,sellerFlag:0;
+uid:1,username:kmaglietta,password:test,sellerFlag:0;

@@ -1,5 +1,7 @@
 package cop4331;
+import java.awt.List;
 import java.io.*;
+import java.util.ArrayList;
 
 public class DatabaseInterface {
 	private static DatabaseInterface instance = null;
@@ -38,4 +40,29 @@ public class DatabaseInterface {
 		
 		return instance;
 	}
+	
+	@SuppressWarnings("resource")
+	public void getUsers(){
+		try {
+			FileReader in = new FileReader("db/users.txt");
+			BufferedReader br = new BufferedReader(in);
+			ArrayList<String> data = new ArrayList<String>();
+			ArrayList<String[]> user = new ArrayList<String[]>();
+			while(br.ready()){
+				data.add(br.readLine());
+			}
+			for(String s : data) {
+				user.add(s.split(","));
+			}
+			for (String[] sa : user) {
+				for (String s : sa){
+					System.out.println(s);
+				}
+			}
+		}
+		catch (IOException e) {
+			System.out.println("Error in DatabaseInterface.getUser()");
+		}
+	}
+	
 }
