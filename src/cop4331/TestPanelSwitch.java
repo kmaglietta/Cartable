@@ -13,9 +13,12 @@ public class TestPanelSwitch {
 
 		JFrame frame = new JFrame();
 		JPanel cards = new JPanel(cardLayout);
+		
 		cards.add(new SignInPage(cardLayout, cards), "Sign In");
 		cards.add(new SignUpPage(cardLayout, cards), "Sign Up");
+		
 		cardLayout.show(cards, "Sign In");
+		
 		frame.add(cards);
 		frame.pack();
 		frame.setVisible(true);

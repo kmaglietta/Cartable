@@ -1,5 +1,4 @@
 package cop4331;
-import java.awt.List;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -48,6 +47,7 @@ public class DatabaseInterface {
 			BufferedReader br = new BufferedReader(in);
 			ArrayList<String> data = new ArrayList<String>();
 			ArrayList<String[]> user = new ArrayList<String[]>();
+			
 			while(br.ready()){
 				data.add(br.readLine());
 			}

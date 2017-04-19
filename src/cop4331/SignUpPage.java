@@ -11,8 +11,13 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class SignUpPage extends JPanel{
+	private CardLayout cardLayout;
+	private JPanel cards;
 	
 	public SignUpPage(CardLayout cardLayout, JPanel cards) {
+		
+		this.cardLayout = cardLayout;
+		this.cards = cards;
 		
 		GridBagConstraints con = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
@@ -52,25 +57,25 @@ public class SignUpPage extends JPanel{
 		//Buttons
 		con.gridx = 0;
 		con.gridy = 4;
-		this.add(createSignInButton(cardLayout,cards), con);
+		this.add(createShowButton("Sign In"), con);
 		con.gridx = 1;
 		con.gridy = 4;
-		this.add(createSignUpButton(cardLayout,cards), con);
+		this.add(createShowButton("Sign Up"), con);
 		
 		this.setVisible(true);
 	}
 	
 	
-	
-	private JButton createSignInButton(CardLayout cardLayout, JPanel cards) {
+	//pass string of panle name
+	private JButton createShowButton(String name) {
 
-		JButton button = new JButton("Sign In");
+		JButton button = new JButton(name);
 		
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cards, "Sign In");
+				showPanel(name);
 			}
 			
 		});
@@ -78,18 +83,7 @@ public class SignUpPage extends JPanel{
 		return button;
 	}
 	
-	private JButton createSignUpButton(CardLayout cardLayout, JPanel cards) {
-JButton button = new JButton("Sign Up");
-		
-		button.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cards, "Sign Up");
-			}
-			
-		});
-		
-		return button;
+	private void showPanel(String name) {
+		cardLayout.show(cards, name);
 	}
 }
