@@ -40,8 +40,8 @@ public class AvailableProdcutsPage extends JPanel{
 	}
 	
 	private void display() {
-				this.add(new JLabel(Session.getInstance().getUser().username()));
-				this.updateUI();
+				this.add(new JLabel(Session.getInstance().getUser().getUsername()));
+				this.updateUI();	
 			
 	}
 }

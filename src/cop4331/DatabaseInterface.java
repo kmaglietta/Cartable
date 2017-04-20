@@ -40,28 +40,72 @@ public class DatabaseInterface {
 		return instance;
 	}
 	
+	public User attemptLogin(String username, String password){
+		ArrayList<String[]> users = getUsers();
+		for(String[] user : users) {
+			if(user[1].equals(username)){
+				if(user[2].equals(password)){
+					return new User(Integer.valueOf(user[0]),user[1],Integer.valueOf(user[3]));
+				}
+			}
+		}
+		return null;
+	}
+	
 	@SuppressWarnings("resource")
-	public void getUsers(){
+	public User addUser(String username, String password, int sellerFlag){
+		try{
+
+			ArrayList<String[]> users = getUsers();
+			FileWriter out = new FileWriter("db/users.txt",true);
+			BufferedWriter bw = new BufferedWriter(out);
+			int index = 0;
+			for(String[] user : users) {
+				if(user[1].equals(username)){
+					throw new NullPointerException();
+				}
+				index++;
+			}
+			bw.newLine();
+			bw.write(index+","+username+","+password+","+sellerFlag);
+			
+			bw.close();
+			out.close();
+			
+			return new User(index, username, sellerFlag);
+		}
+		catch(NullPointerException e){
+			return null;
+		}
+		catch(IOException e){
+			return null;
+		}
+		
+	}
+	
+	private ArrayList<String[]> getUsers(){
 		try {
 			FileReader in = new FileReader("db/users.txt");
 			BufferedReader br = new BufferedReader(in);
 			ArrayList<String> data = new ArrayList<String>();
-			ArrayList<String[]> user = new ArrayList<String[]>();
+			ArrayList<String[]> users = new ArrayList<String[]>();
 			
 			while(br.ready()){
 				data.add(br.readLine());
 			}
+			
 			for(String s : data) {
-				user.add(s.split(","));
+				users.add(s.split(","));
 			}
-			for (String[] sa : user) {
-				for (String s : sa){
-					System.out.println(s);
-				}
-			}
+			
+			br.close();
+			in.close();
+			
+			return users;
 		}
 		catch (IOException e) {
 			System.out.println("Error in DatabaseInterface.getUser()");
+			return null;
 		}
 	}
 	
