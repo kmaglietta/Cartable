@@ -7,8 +7,14 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class SignInPage extends JPanel{
+	private CardLayout cardLayout;
+	private JPanel cards;
+	
 	public SignInPage(CardLayout cardLayout, JPanel cards) {
-
+		
+		this.cardLayout = cardLayout;
+		this.cards = cards;
+		
 		GridBagConstraints con = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
 		//con.fill = GridBagConstraints.VERTICAL;
@@ -27,27 +33,32 @@ public class SignInPage extends JPanel{
 		con.gridx = 0;
 		con.gridy = 2;
 		con.gridwidth = 2;
-		this.add(createSignUpButton(cardLayout,cards), con);
+		this.add(createShowButton("Sign Up"), con);
 		
 		this.setVisible(true);
 	}
 	
 	
 	
-	private JButton createSignUpButton(CardLayout cardLayout, JPanel cards) {
+	//pass string of panle name
+		private JButton createShowButton(String name) {
 
-		JButton button = new JButton("Sign Up");
-		
-		button.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cards, "Sign Up");
-			}
+			JButton button = new JButton(name);
 			
-		});
+			button.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					showPanel(name);
+				}
+				
+			});
+			
+			return button;
+		}
 		
-		return button;
-	}
+		private void showPanel(String name) {
+			cardLayout.show(cards, name);
+		}
 }
 
