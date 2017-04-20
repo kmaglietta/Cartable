@@ -1,6 +1,7 @@
 package cop4331;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class DatabaseInterface {
 	private static DatabaseInterface instance = null;
@@ -41,7 +42,7 @@ public class DatabaseInterface {
 	}
 	
 	public User attemptLogin(String username, String password){
-		ArrayList<String[]> users = getUsers();
+		ArrayList<String[]> users = get("users");
 		for(String[] user : users) {
 			if(user[1].equals(username)){
 				if(user[2].equals(password)){
@@ -56,7 +57,7 @@ public class DatabaseInterface {
 	public User addUser(String username, String password, int sellerFlag){
 		try{
 
-			ArrayList<String[]> users = getUsers();
+			ArrayList<String[]> users = get("users");
 			FileWriter out = new FileWriter("db/users.txt",true);
 			BufferedWriter bw = new BufferedWriter(out);
 			int index = 0;
@@ -82,30 +83,49 @@ public class DatabaseInterface {
 		}
 		
 	}
-
 	
-	private ArrayList<String[]> getUsers(){
-		try {
-			FileReader in = new FileReader("db/users.txt");
-			BufferedReader br = new BufferedReader(in);
-			ArrayList<String> data = new ArrayList<String>();
-			ArrayList<String[]> users = new ArrayList<String[]>();
-			
+	public Iterator<Product> getProducts(){
+		ArrayList<Product> products = new ArrayList<Product>();
+		for(String[] entity : get("products")){
+			products.add(new Product(
+					Integer.valueOf(entity[0]),
+					Integer.valueOf(entity[1]),
+					entity[2],
+					entity[3],
+					Double.valueOf(entity[4]),
+					Double.valueOf(entity[5])
+					));
+		}
+		return products.iterator();
+	}
+	
+	private ArrayList<String[]> parse(BufferedReader br){
+		ArrayList<String> data = new ArrayList<String>();
+		ArrayList<String[]> entities = new ArrayList<String[]>();
+		try{
 			while(br.ready()){
 				data.add(br.readLine());
 			}
 			
 			for(String s : data) {
-				users.add(s.split(","));
+				entities.add(s.split(","));
 			}
-			
+
 			br.close();
-			in.close();
-			
-			return users;
+		}
+		catch(IOException e){}
+		
+		return entities;
+	}
+	
+	private ArrayList<String[]> get(String file) {
+		try {
+			FileReader in = new FileReader("db/"+file+".txt");
+			BufferedReader br = new BufferedReader(in);
+			return parse(br);
 		}
 		catch (IOException e) {
-			System.out.println("Error in DatabaseInterface.getUser()");
+			System.out.println("No such table exisits");
 			return null;
 		}
 	}

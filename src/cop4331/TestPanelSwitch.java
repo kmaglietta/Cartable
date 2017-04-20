@@ -11,8 +11,9 @@ public class TestPanelSwitch {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("Cartable");
 		JPanel cards = new JPanel(cardLayout);
+		cards.setSize(500,500);
 		
 		cards.add(new SignInPage(cardLayout, cards), "SignIn");
 		cards.add(new SignUpPage(cardLayout, cards), "SignUp");
@@ -21,7 +22,7 @@ public class TestPanelSwitch {
 		cardLayout.show(cards, "Sign In");
 		
 		frame.add(cards);
-		frame.pack();
+		frame.setSize(500,500);
 		frame.setVisible(true);
 	}
 

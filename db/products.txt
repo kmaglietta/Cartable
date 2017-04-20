@@ -1,0 +1,2 @@
+0,0,Shirt,Nice comfortable slim fit,2.00,1.50
+1,0,Shoes,Brown,3.00,1.50

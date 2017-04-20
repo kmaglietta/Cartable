@@ -89,7 +89,7 @@ public class SignInPage extends JPanel{
 				
 				if(valid) {
 					user = DatabaseInterface.getInstance().attemptLogin(fieldText.get(0),fieldText.get(1));
-					if(!user.equals(null)){
+					if(user != null){
 						Session.getInstance().setUser(user);
 					}
 					else{
