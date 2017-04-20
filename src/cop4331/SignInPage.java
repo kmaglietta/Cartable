@@ -102,7 +102,12 @@ public class SignInPage extends JPanel{
 					else if(error.equals("fail")) generatePopUp("Username or password are incorect");
 				}
 				else {
-					showPanel("Available");
+					if(user.isSeller()){
+						showPanel("Invnetory");
+					}
+					else {
+						showPanel("Available");
+					}
 				}
 			}
 			

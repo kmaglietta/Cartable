@@ -10,6 +10,11 @@ public class User {
 		setSellerFlag(flag);
 	}
 	
+	public boolean isSeller(){
+		if(sellerFlag == 1) return true;
+		else return false;
+	}
+	
 	public int getId() {
 		return id;
 	}
