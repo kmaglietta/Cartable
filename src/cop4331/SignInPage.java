@@ -33,7 +33,7 @@ public class SignInPage extends JPanel{
 		con.gridx = 0;
 		con.gridy = 2;
 		con.gridwidth = 2;
-		this.add(createShowButton("Sign Up"), con);
+		this.add(createShowButton("SignUp"), con);
 		
 		this.setVisible(true);
 	}

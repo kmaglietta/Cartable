@@ -3,11 +3,12 @@ package cop4331;
 public class User {
 	private int id;
 	private String username;
-	private String firstName;
-	private String lastName;
+	/*private String firstName;
+	private String lastName;*/
 	
-	public User() {
-		
+	public User(int id, String username) {
+		this.id = id;
+		this.username = username;
 	}
 	
 	public int getId() {
@@ -16,13 +17,5 @@ public class User {
 	
 	public String username() {
 		return username;
-	}
-	
-	public String firstName() {
-		return firstName;
-	}
-	
-	public String lastName() {
-		return lastName;
 	}
 }

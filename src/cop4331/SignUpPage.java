@@ -34,9 +34,10 @@ public class SignUpPage extends JPanel{
 		con.gridx = 0;
 		con.gridy = 1;
 		this.add(new JLabel("Username"), con);
+		TextField username = new TextField("Username", 10);
 		con.gridx = 1;
 		con.gridy = 1;
-		this.add(new TextField("Username", 10), con);
+		this.add(username, con);
 		
 		//Password
 		con.gridx = 0;
@@ -57,14 +58,18 @@ public class SignUpPage extends JPanel{
 		//Buttons
 		con.gridx = 0;
 		con.gridy = 4;
-		this.add(createShowButton("Sign In"), con);
+		this.add(createShowButton("SignIn"), con);
 		con.gridx = 1;
 		con.gridy = 4;
-		this.add(createShowButton("Sign Up"), con);
+		this.add(createSubmitButton(username.getText()), con);
 		
 		this.setVisible(true);
 	}
+
 	
+	private void showPanel(String name) {
+		cardLayout.show(cards, name);
+	}
 	
 	//pass string of panle name
 	private JButton createShowButton(String name) {
@@ -83,7 +88,19 @@ public class SignUpPage extends JPanel{
 		return button;
 	}
 	
-	private void showPanel(String name) {
-		cardLayout.show(cards, name);
+	private JButton createSubmitButton(String username) {
+		JButton submit = new JButton("Submit");
+		
+		submit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Session.getInstance().setUser(new User(0,username));
+				showPanel("Available");
+			}
+			
+		});
+		
+		return submit;
 	}
 }
