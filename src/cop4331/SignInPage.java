@@ -41,24 +41,24 @@ public class SignInPage extends JPanel{
 	
 	
 	//pass string of panle name
-		private JButton createShowButton(String name) {
-
-			JButton button = new JButton(name);
-			
-			button.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					showPanel(name);
-				}
-				
-			});
-			
-			return button;
-		}
+	private JButton createShowButton(String name) {
+	
+		JButton button = new JButton(name);
 		
-		private void showPanel(String name) {
-			cardLayout.show(cards, name);
-		}
+		button.addActionListener(new ActionListener() {
+	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showPanel(name);
+			}
+			
+		});
+		
+		return button;
+	}
+	
+	private void showPanel(String name) {
+		cardLayout.show(cards, name);
+	}
 }
 
