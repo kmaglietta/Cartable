@@ -10,3 +10,5 @@
 9,cat,test,0
 10,dog,test,0
 11,rat,bill,0
+12,Dake,test,1
+13,Abe,test,1

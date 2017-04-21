@@ -15,6 +15,7 @@ public class SignUpPage extends JPanel{
 
 	private ArrayList<String> fieldText = new ArrayList<String>();
 	private ArrayList<TextField> fields = new ArrayList<TextField>();
+	private JCheckBox sellerFlag = new JCheckBox();
 	private CardLayout cardLayout;
 	private JPanel cards;
 	
@@ -52,12 +53,20 @@ public class SignUpPage extends JPanel{
 		con.gridy = 3;
 		this.add(fields.get(2), con);
 		
-		//Buttons
+		//Password
 		con.gridx = 0;
 		con.gridy = 4;
-		this.add(createShowButton("SignIn"), con);
+		this.add(new JLabel("Seller"), con);
 		con.gridx = 1;
 		con.gridy = 4;
+		this.add(sellerFlag, con);
+		
+		//Buttons
+		con.gridx = 0;
+		con.gridy = 5;
+		this.add(createShowButton("SignIn"), con);
+		con.gridx = 1;
+		con.gridy = 5;
 		this.add(createSubmitButton(), con);
 	}
 	
@@ -102,7 +111,7 @@ public class SignUpPage extends JPanel{
 				}
 				
 				if(fieldText.get(1).equals(fieldText.get(2))) {
-					user = DatabaseInterface.getInstance().addUser(fieldText.get(0), fieldText.get(1), 0);
+					user = DatabaseInterface.getInstance().addUser(fieldText.get(0), fieldText.get(1), booltoInt(sellerFlag.isSelected()));
 					if (user == null){
 						valid = false;
 						error = "name";
@@ -119,7 +128,8 @@ public class SignUpPage extends JPanel{
 				}
 				else {
 					Session.getInstance().setUser(user);
-					showPanel("Available");
+					if(sellerFlag.isSelected()) showPanel("Invnetory");
+					else showPanel("Available");
 				}
 			}
 			
@@ -130,6 +140,11 @@ public class SignUpPage extends JPanel{
 	
 	public void generatePopUp(String mes) {
 		JOptionPane.showMessageDialog(this, mes);
+	}
+	
+	public int booltoInt(Boolean bool){
+		if(bool) return 1;
+		return 0;
 	}
 	
 	private void getText() {
