@@ -23,7 +23,7 @@ public class ProductPanel extends JPanel{
 		con.gridy = 0;
 		this.add(new JLabel(prod.getName()),con);
 		con.gridx = 2;
-		this.add(new JLabel("$"+String.valueOf(prod.getCost())),con);
+		this.add(new JLabel("$"+String.valueOf(prod.getSellPrice())),con);
 		con.gridx = 0;
 		con.gridy = 1;
 		con.gridwidth = 3;

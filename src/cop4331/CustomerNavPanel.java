@@ -15,9 +15,26 @@ public class CustomerNavPanel extends JPanel{
 		this.cardLayout = cardLayout;
 		this.cards = cards;
 		this.add(new JLabel("Welcome "+Session.getInstance().getUser().getUsername()));
+		this.add(createShowButton("Available"));
 		this.add(createSignOutButton());
 	}
 	
+	private JButton createShowButton(String string) {
+		// TODO Auto-generated method stub
+		JButton show = new JButton(string);
+		show.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showPanel(string);
+				
+			}
+			
+		});
+		
+		return show;
+	}
+
 	private JButton createSignOutButton(){
 		JButton signout = new JButton("SignOut");
 		

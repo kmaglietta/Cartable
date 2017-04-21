@@ -4,7 +4,7 @@ public class Session {
 	private static Session instance = null;
 	private User user = null;
 	private Product product = null;
-	//private Cart cart = null;
+	private Cart cart = null;
 	
 	protected Session() {
 		
@@ -16,6 +16,12 @@ public class Session {
 		}
 		
 		return instance;
+	}
+	
+	public void clear() {
+		setUser(null);
+		setProduct(null);
+		setCart(null);
 	}
 
 	public User getUser() {
@@ -33,10 +39,12 @@ public class Session {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	public void clear() {
-		user = null;
-		product = null;
-		//cart = null;
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 }

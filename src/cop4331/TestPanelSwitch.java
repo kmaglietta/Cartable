@@ -1,5 +1,6 @@
 package cop4331;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ public class TestPanelSwitch {
 		// TODO Auto-generated method stub
 
 		JFrame frame = new JFrame("Cartable");
+		frame.setLayout(new BorderLayout());
 		JPanel cards = new JPanel(cardLayout);
 		cards.setSize(500,500);
 		
@@ -23,7 +25,7 @@ public class TestPanelSwitch {
 		
 		cardLayout.show(cards, "SignUp");
 		
-		frame.add(cards);
+		frame.add(cards, BorderLayout.CENTER);
 		frame.setSize(500,500);
 		frame.setVisible(true);
 	}
