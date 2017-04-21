@@ -44,7 +44,6 @@ public class AvailableProdcutsPage extends JPanel{
 			
 		});
 	}
-	
 	private void reset() {
 		this.removeAll();
 		
@@ -58,10 +57,7 @@ public class AvailableProdcutsPage extends JPanel{
 
 		con.gridx = 2;
 		con.gridy = 0;
-		this.add(createSignOutButton(),con);
-		con.gridx = 0;
-		con.gridy = 0;
-		this.add(new JLabel("Welcome " + Session.getInstance().getUser().getUsername()),con);
+		this.add(new CustomerNavPanel(cardLayout, cards), con);
 		
 		con.gridy = 2;
 		
@@ -71,15 +67,13 @@ public class AvailableProdcutsPage extends JPanel{
 		this.add(new JLabel("Description"),con);
 		con.gridx = 2;
 		this.add(new JLabel("Cost"),con);
-		
+		con.gridx = 0;
 		while(it.hasNext()){
-			con.gridy++;
-			Product pro = it.next();con.gridx = 0;
-			this.add(new JLabel(pro.getName()),con);
-			con.gridx = 1;
-			this.add(new JLabel(pro.getDescription()),con);
-			con.gridx = 2;
-			this.add(new JLabel(String.valueOf(pro.getCost())),con);
+			con.gridy ++;
+			con.ipady = 40;
+			con.fill = con.HORIZONTAL;
+			con.gridwidth = 3;
+			this.add(new ProductPanel(it.next(), cardLayout, cards), con);
 		}
 		this.updateUI();	
 			
@@ -88,20 +82,6 @@ public class AvailableProdcutsPage extends JPanel{
 	private void showPanel(String name) {
 		cardLayout.show(cards, name);
 	}
-	
-	private JButton createSignOutButton(){
-		JButton signout = new JButton("SignOut");
 		
-		signout.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Session.getInstance().clear();
-				showPanel("SignIn");
-			}
-			
-		});
 		
-		return signout;
-	}
 }

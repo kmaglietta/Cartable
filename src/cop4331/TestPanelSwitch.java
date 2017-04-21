@@ -18,6 +18,7 @@ public class TestPanelSwitch {
 		cards.add(new SignInPage(cardLayout, cards), "SignIn");
 		cards.add(new SignUpPage(cardLayout, cards), "SignUp");
 		cards.add(new AvailableProdcutsPage(cardLayout, cards), "Available");
+		cards.add(new ProductPage(cardLayout, cards), "Product");
 		
 		cardLayout.show(cards, "Sign In");
 		
