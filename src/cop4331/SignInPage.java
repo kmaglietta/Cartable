@@ -7,17 +7,18 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class SignInPage extends JPanel{
-	private CardLayout cardLayout;
-	private JPanel cards;
+public class SignInPage extends Page{
+
 	private ArrayList<String> fieldText = new ArrayList<String>();
 	private ArrayList<TextField> fields = new ArrayList<TextField>();
 	
 	public SignInPage(CardLayout cardLayout, JPanel cards) {
-		
-		this.cardLayout = cardLayout;
-		this.cards = cards;
-		
+		super(cardLayout, cards);
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public void display(){
 		GridBagConstraints con = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
 		
@@ -48,9 +49,11 @@ public class SignInPage extends JPanel{
 		this.setVisible(true);
 	}
 	
+	public void showPanel(String name){
+		super.showPanel(name);
+	}
 	
-	
-	//pass string of panle name
+	//pass string of panel name
 	private JButton createShowButton(String name) {
 	
 		JButton button = new JButton(name);
@@ -114,10 +117,6 @@ public class SignInPage extends JPanel{
 		});
 		
 		return submit;
-	}
-	
-	private void showPanel(String name) {
-		cardLayout.show(cards, name);
 	}
 	
 	private void generatePopUp(String mes) {

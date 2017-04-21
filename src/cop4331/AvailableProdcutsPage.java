@@ -3,53 +3,19 @@ package cop4331;
 import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.*;
 import java.util.Iterator;
 
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class AvailableProdcutsPage extends JPanel{
-	private CardLayout cardLayout;
-	private JPanel cards;
-
+public class AvailableProdcutsPage extends Page{
 	public AvailableProdcutsPage(CardLayout cardLayout, JPanel cards) {
-		this.cardLayout = cardLayout;
-		this.cards = cards;
-		
-		this.addComponentListener(new ComponentListener(){
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				display();
-			}
-
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				reset();
-			}
-			
-		});
+		super(cardLayout, cards);
+		// TODO Auto-generated constructor stub
 	}
-	private void reset() {
-		this.removeAll();
-		
-	}
-
-	private void display() {
+	
+	@Override
+	public void display() {
 		
 		GridBagConstraints con = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
@@ -57,7 +23,7 @@ public class AvailableProdcutsPage extends JPanel{
 
 		con.gridx = 2;
 		con.gridy = 0;
-		this.add(new CustomerNavPanel(cardLayout, cards), con);
+		this.add(new CustomerNavPanel(super.getCardLayout(), super.getCards()), con);
 		
 		con.gridy = 2;
 		
@@ -73,15 +39,8 @@ public class AvailableProdcutsPage extends JPanel{
 			con.ipady = 40;
 			con.fill = con.HORIZONTAL;
 			con.gridwidth = 3;
-			this.add(new ProductPanel(it.next(), cardLayout, cards), con);
+			this.add(new ProductPanel(it.next(), super.getCardLayout(), super.getCards()), con);
 		}
 		this.updateUI();	
-			
 	}
-	
-	private void showPanel(String name) {
-		cardLayout.show(cards, name);
-	}
-		
-		
 }

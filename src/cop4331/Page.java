@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -41,8 +42,15 @@ public class Page extends JPanel{
 			
 		});
 	}
-	public void display(){}
-	public void reset(){this.removeAll();}
+	public void display(){
+		this.add(new JLabel("Page"));
+	}
+	public void reset(){
+		this.removeAll();
+	}
+	public void showPanel(String name) {
+		cardLayout.show(cards, name);
+	}
 	public CardLayout getCardLayout() {
 		return cardLayout;
 	}
