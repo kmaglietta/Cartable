@@ -18,7 +18,7 @@ public class ProductPanel extends JPanel{
 		this.setLayout(new GridBagLayout());
 		
 
-		con.weighty = con.HORIZONTAL;
+		//con.weighty = con.HORIZONTAL;
 		con.gridx = 0;
 		con.gridy = 0;
 		this.add(new JLabel(prod.getName()),con);

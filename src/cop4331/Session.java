@@ -4,7 +4,7 @@ public class Session {
 	private static Session instance = null;
 	private User user = null;
 	private Product product = null;
-	private Cart cart = null;
+	//private Cart cart = null;
 	
 	protected Session() {
 		
@@ -37,6 +37,6 @@ public class Session {
 	public void clear() {
 		user = null;
 		product = null;
-		cart = null;
+		//cart = null;
 	}
 }

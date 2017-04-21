@@ -37,7 +37,7 @@ public class AvailableProdcutsPage extends Page{
 		while(it.hasNext()){
 			con.gridy ++;
 			con.ipady = 40;
-			con.fill = con.HORIZONTAL;
+			//con.fill = con.HORIZONTAL;
 			con.gridwidth = 3;
 			this.add(new ProductPanel(it.next(), super.getCardLayout(), super.getCards()), con);
 		}

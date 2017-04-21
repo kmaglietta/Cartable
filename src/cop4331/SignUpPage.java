@@ -12,16 +12,15 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class SignUpPage extends JPanel{
-	private CardLayout cardLayout;
-	private JPanel cards;
+
 	private ArrayList<String> fieldText = new ArrayList<String>();
 	private ArrayList<TextField> fields = new ArrayList<TextField>();
+	private CardLayout cardLayout;
+	private JPanel cards;
 	
 	public SignUpPage(CardLayout cardLayout, JPanel cards) {
-		
 		this.cardLayout = cardLayout;
 		this.cards = cards;
-		
 		GridBagConstraints con = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
 		
@@ -60,16 +59,13 @@ public class SignUpPage extends JPanel{
 		con.gridx = 1;
 		con.gridy = 4;
 		this.add(createSubmitButton(), con);
-		
-		this.setVisible(true);
 	}
-
 	
-	private void showPanel(String name) {
+	public void showPanel(String name) {
 		cardLayout.show(cards, name);
 	}
 	
-	//pass string of panle name
+	//pass string of panel name
 	private JButton createShowButton(String name) {
 
 		JButton button = new JButton(name);
@@ -132,7 +128,7 @@ public class SignUpPage extends JPanel{
 		return submit;
 	}
 	
-	private void generatePopUp(String mes) {
+	public void generatePopUp(String mes) {
 		JOptionPane.showMessageDialog(this, mes);
 	}
 	

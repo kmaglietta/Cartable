@@ -5,6 +5,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -31,7 +32,6 @@ public class Page extends JPanel{
 
 			@Override
 			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
 				display();
 			}
 
@@ -50,6 +50,9 @@ public class Page extends JPanel{
 	}
 	public void showPanel(String name) {
 		cardLayout.show(cards, name);
+	}
+	public void generatePopUp(String mes) {
+		JOptionPane.showMessageDialog(this, mes);
 	}
 	public CardLayout getCardLayout() {
 		return cardLayout;
