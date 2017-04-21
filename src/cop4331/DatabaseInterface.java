@@ -11,10 +11,11 @@ public class DatabaseInterface {
 			File db_dir = new File("db/");
 			File users = new File("db/users.txt");
 			File products = new File("db/products.txt");
+			File carts = new File ("db/carts.txt");
 			File orders = new File ("db/oreders.txt");
 			
 			if (db_dir.mkdirs()) {
-				if (users.createNewFile() && products.createNewFile() && orders.createNewFile()) {
+				if (users.createNewFile() && products.createNewFile() && carts.createNewFile() && orders.createNewFile()) {
 					System.out.println("Files created");
 				}
 				else {
@@ -84,6 +85,18 @@ public class DatabaseInterface {
 		
 	}
 	
+	public Cart getUserCart(int uid){
+		ArrayList<Product> cartItems = new ArrayList<Product>();
+		int id = 0;
+		for(String[] entity : get("carts")){
+			if(entity[1].equals(String.valueOf(uid))){
+				id = Integer.valueOf(entity[0]);
+				cartItems.add(getProduct(Integer.valueOf(entity[2])));
+			}
+		}
+		return new Cart(id,uid,cartItems.iterator());
+	}
+	
 	public Iterator<Product> getProducts(){
 		ArrayList<Product> products = new ArrayList<Product>();
 		for(String[] entity : get("products")){
@@ -97,6 +110,18 @@ public class DatabaseInterface {
 					));
 		}
 		return products.iterator();
+	}
+	
+	public Product getProduct(int id){
+		Iterator<Product> prods = getProducts();
+		Product prod = null;
+		while(prods.hasNext()){
+			prod = prods.next();
+			if(prod.getId() == id){
+				return prod; 
+			}
+		}
+		return prod;
 	}
 	
 	private ArrayList<String[]> parse(BufferedReader br){

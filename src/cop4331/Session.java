@@ -41,6 +41,9 @@ public class Session {
 	}
 
 	public Cart getCart() {
+		if(user != null){
+			setCart(DatabaseInterface.getInstance().getUserCart(user.getId()));
+		}
 		return cart;
 	}
 

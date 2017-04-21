@@ -16,6 +16,7 @@ public class CustomerNavPanel extends JPanel{
 		this.cards = cards;
 		this.add(new JLabel("Welcome "+Session.getInstance().getUser().getUsername()));
 		this.add(createShowButton("Available"));
+		this.add(createShowButton("Cart"));
 		this.add(createSignOutButton());
 	}
 	

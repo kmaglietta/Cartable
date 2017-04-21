@@ -23,7 +23,7 @@ public class TestPanelSwitch {
 		cards.add(new ProductPage(cardLayout, cards), "Product");
 		cards.add(new CartPage(cardLayout,cards), "Cart");
 		
-		cardLayout.show(cards, "SignUp");
+		cardLayout.show(cards, "SignIn");
 		
 		frame.add(cards, BorderLayout.CENTER);
 		frame.setSize(500,500);
