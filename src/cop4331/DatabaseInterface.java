@@ -2,10 +2,17 @@ package cop4331;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-
+/**<h1>DatabaseInterface</h1>
+ * Handles the operations between the application and db/files*/
 public class DatabaseInterface {
 	private static DatabaseInterface instance = null;
 	File db_dir, users, products, carts, orders, temp;
+	
+	/**<h1>Constructor</h1>
+	 * Creates the needed files and directory.
+	 * If something happens please delete the db/ directory
+	 * and restart the application
+	 * */
 	protected DatabaseInterface() {
 		try {
 			db_dir = new File("db/");
@@ -35,6 +42,10 @@ public class DatabaseInterface {
 		}
 	}
 	
+	/**<h1>getInstance</h1>
+	 * Needed for the singleton paten
+	 * Returns the instance of DatabaseInterface
+	 * */
 	public static DatabaseInterface getInstance() {
 		if(instance == null){
 			instance = new DatabaseInterface();
@@ -43,6 +54,10 @@ public class DatabaseInterface {
 		return instance;
 	}
 	
+	/**<h1>attempLogin</h1>
+	 * Takes the credentials and compares them with those stored.
+	 * @return If there is a match User is returned else null 
+	 * */
 	public User attemptLogin(String username, String password){
 		ArrayList<String[]> users = get(this.users);
 		for(String[] user : users) {
@@ -55,7 +70,10 @@ public class DatabaseInterface {
 		return null;
 	}
 	
-	@SuppressWarnings("resource")
+	/**<h1>addUser</h1>
+	 * Takes the information and attempts to add a new user
+	 * @return User if successful otherwise returns null
+	 * */
 	public User addUser(String username, String password, int sellerFlag){
 		try{
 
@@ -65,6 +83,7 @@ public class DatabaseInterface {
 			int index = 0;
 			for(String[] user : users) {
 				if(user[1].equals(username)){
+					bw.close();
 					throw new NullPointerException();
 				}
 				index++;
@@ -85,7 +104,35 @@ public class DatabaseInterface {
 		}
 		
 	}
+	/**<h1>setOrder</h1>
+	 *	Adds the order to orders table
+	 * */
+	public void setOrder(int id, Iterator<Product> products) {
+		try{
+			FileWriter out = new FileWriter(orders);
+			BufferedWriter bw = new BufferedWriter(out);
+			Product prod = null;
+			
+			while(products.hasNext()){
+				prod = products.next();
+				bw.write(id + "," + prod.getSid() + "," + prod.getId());
+				bw.newLine();
+			}
+			
+			
+			bw.close();
+			out.close();
+		}
+		catch(IOException e){
+			
+		}
+		
+	}
 	
+	/**<h1>getCart</h1>
+	 *	Retries the cart associated with the passed uid
+	 *	@return Cart
+	 * */
 	public Cart getCart(int uid){
 		ArrayList<Product> cartItems = new ArrayList<Product>();
 		for(String[] entity : get(this.carts)){
@@ -96,6 +143,9 @@ public class DatabaseInterface {
 		return new Cart(uid,cartItems.iterator());
 	}
 	
+	/**<h1>updateCartTabel</h1>
+	 *	Updates the associated cat this passed products
+	 * */
 	public void updateCartTabel(int uid, Cart cart){
 		try {
 			FileWriter out = new FileWriter(temp);
@@ -130,11 +180,99 @@ public class DatabaseInterface {
 			
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**<h1>addProduct</h1>
+	 * Attempts to add the product.
+	 * @return Products if successful otherwise returns null
+	 * */
+	public Product addProduct(int sid, String name, String description, double sellprice, double cost){
+		try{
+			ArrayList<String[]> products = get(this.products);
+			FileWriter out = new FileWriter(this.products, true);
+			BufferedWriter bw = new BufferedWriter(out);
+			int index = products.size();
+			bw.newLine();
+			bw.write(String.valueOf(index)+","+String.valueOf(sid)+","+name+","+description+","+String.valueOf(sellprice)+","+String.valueOf(cost));
+			
+			bw.close();
+			out.close();
+			
+			return new Product(index,sid,name,description,sellprice,cost);
+		}
+		catch(IOException e){
+			return null;
+		}
+	}
+	
+	public void updateProduct(Product prod){
+		try{
+			FileWriter out = new FileWriter(this.temp);
+			BufferedWriter bw = new BufferedWriter(out);
+			for(String[] entity : get(this.products)){
+				if(!entity[0].equals(String.valueOf(prod.getId()))){
+					bw.write(String.valueOf(entity[0])+","+String.valueOf(entity[1])+","+entity[2]+","+entity[3]+","+String.valueOf(entity[4])+","+String.valueOf(entity[5]));
+					bw.newLine();
+				}
+			}
+			bw.close();
+			out.close();
+			this.products.delete();
+			
+			out = new FileWriter(this.products);
+			bw = new BufferedWriter(out);
+			
+			for(String[] entity : get(this.temp)){
+				bw.write(String.valueOf(entity[0])+","+String.valueOf(entity[1])+","+entity[2]+","+entity[3]+","+String.valueOf(entity[4])+","+String.valueOf(entity[5]));
+				bw.newLine();
+			}
+			
+			bw.write(String.valueOf(prod.getId())+","+String.valueOf(prod.getSid())+","+prod.getName()+","+prod.getDescription()+","+String.valueOf(prod.getSellPrice())+","+String.valueOf(prod.getCost()));
+			
+			bw.close();
+			out.close();
+		}
+		catch(IOException e){
+			
+		}
+	}
+	
+	public void deleteProduct(Product prod){
+		try{
+			FileWriter out = new FileWriter(this.temp);
+			BufferedWriter bw = new BufferedWriter(out);
+			for(String[] entity : get(this.products)){
+				if(!entity[0].equals(String.valueOf(prod.getId()))){
+					bw.write(String.valueOf(entity[0])+","+String.valueOf(entity[1])+","+entity[2]+","+entity[3]+","+String.valueOf(entity[4])+","+String.valueOf(entity[5]));
+					bw.newLine();
+				}
+			}
+			bw.close();
+			out.close();
+			this.products.delete();
+			
+			out = new FileWriter(this.products);
+			bw = new BufferedWriter(out);
+			
+			for(String[] entity : get(this.temp)){
+				bw.write(String.valueOf(entity[0])+","+String.valueOf(entity[1])+","+entity[2]+","+entity[3]+","+String.valueOf(entity[4])+","+String.valueOf(entity[5]));
+				bw.newLine();
+			}
+			
+			bw.close();
+			out.close();
+		}
+		catch(IOException e){
+			
+		}
+	}
+	
+	/**<h1>getProducts</h1>
+	 * Get all products
+	 * @return Iterator<Products>
+	 * */
 	public Iterator<Product> getProducts(){
 		ArrayList<Product> products = new ArrayList<Product>();
 		for(String[] entity : get(this.products)){
@@ -150,6 +288,10 @@ public class DatabaseInterface {
 		return products.iterator();
 	}
 	
+	/**<h1>getProduct</h1>
+	 * Gets individual product matching id
+	 * @return Product if successful otherwise returns null
+	 * */
 	public Product getProduct(int id){
 		Iterator<Product> prods = getProducts();
 		Product prod = null;
@@ -162,6 +304,10 @@ public class DatabaseInterface {
 		return prod;
 	}
 	
+	/**<h1>parse</h1>
+	 * Parses the file into a string array
+	 * @return ArrayList
+	 * */
 	private ArrayList<String[]> parse(BufferedReader br){
 		ArrayList<String> data = new ArrayList<String>();
 		ArrayList<String[]> entities = new ArrayList<String[]>();
@@ -181,6 +327,10 @@ public class DatabaseInterface {
 		return entities;
 	}
 	
+	/**<h1>get</h1>
+	 * Returns the contents of a file
+	 * @return ArrayList
+	 * */
 	private ArrayList<String[]> get(File file) {
 		try {
 			FileReader in = new FileReader(file);
@@ -191,28 +341,6 @@ public class DatabaseInterface {
 			System.out.println("No such table exisits");
 			return null;
 		}
-	}
-
-	public void setOrder(int id, Iterator<Product> products) {
-		try{
-			FileWriter out = new FileWriter(orders);
-			BufferedWriter bw = new BufferedWriter(out);
-			Product prod = null;
-			
-			while(products.hasNext()){
-				prod = products.next();
-				bw.write(id + "," + prod.getSid() + "," + prod.getId());
-				bw.newLine();
-			}
-			
-			
-			bw.close();
-			out.close();
-		}
-		catch(IOException e){
-			
-		}
-		
 	}
 	
 }
