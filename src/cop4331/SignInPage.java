@@ -103,7 +103,7 @@ public class SignInPage extends JPanel{
 				}
 				else {
 					if(user.isSeller()){
-						showPanel("Invnetory");
+						showPanel("Inventory");
 					}
 					else {
 						showPanel("Available");

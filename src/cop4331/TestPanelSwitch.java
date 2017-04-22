@@ -24,6 +24,7 @@ public class TestPanelSwitch {
 		cards.add(new CartPage(cardLayout,cards), "Cart");
 		cards.add(new CheckoutPage1(cardLayout,cards), "Checkout1");
 		cards.add(new CheckoutPage2(cardLayout,cards), "Checkout2");
+		cards.add(new InventoryPage(cardLayout,cards), "Inventory");
 		
 		cardLayout.show(cards, "SignIn");
 		
