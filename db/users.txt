@@ -1,4 +1,4 @@
-0,test,test,0
+0,test,test,1
 1,kmaglietta,test,0
 2,bill,test,0
 3,sell,test,1

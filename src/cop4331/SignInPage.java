@@ -103,6 +103,7 @@ public class SignInPage extends JPanel{
 				}
 				else {
 					if(user.isSeller()){
+						Session.getInstance().setOrder(DatabaseInterface.getInstance().getSales(user.getId()));
 						showPanel("Inventory");
 					}
 					else {

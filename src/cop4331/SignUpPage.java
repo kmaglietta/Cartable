@@ -128,7 +128,10 @@ public class SignUpPage extends JPanel{
 				}
 				else {
 					Session.getInstance().setUser(user);
-					if(sellerFlag.isSelected()) showPanel("Invnetory");
+					if(sellerFlag.isSelected()) {
+						Session.getInstance().setOrder(DatabaseInterface.getInstance().getSales(user.getId()));
+						showPanel("Invnetory");
+					}
 					else showPanel("Available");
 				}
 			}

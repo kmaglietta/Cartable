@@ -269,6 +269,27 @@ public class DatabaseInterface {
 		}
 	}
 	
+	public Iterator<Product> getProducts(int id){
+		ArrayList<Product> products = new ArrayList<Product>();
+		Iterator<Product> it = getProducts();
+		Product prod = null;
+		while(it.hasNext()){
+			prod = it.next();
+			if(prod.getSid() == id) products.add(prod);
+		}
+		return products.iterator();
+	}
+	
+	public Order getSales(int id){
+		ArrayList<Product> products = new ArrayList<Product>();
+		for(String[] entity : get(this.orders)){
+			if(entity[1].equals(String.valueOf(id))){
+				products.add(getProduct(Integer.valueOf(entity[2])));
+			}
+		}
+		return new Order(id, products);
+	}
+	
 	/**<h1>getProducts</h1>
 	 * Get all products
 	 * @return Iterator<Products>

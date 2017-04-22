@@ -5,6 +5,7 @@ public class Session {
 	private User user = null;
 	private Product product = null;
 	private Cart cart = null;
+	private Order order = null;
 	
 	protected Session() {
 		
@@ -53,5 +54,13 @@ public class Session {
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 }

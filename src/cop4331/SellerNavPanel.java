@@ -14,10 +14,9 @@ public class SellerNavPanel extends NavPanel {
 	@Override
 	public void display(){
 		this.add(createShowButton("Inventory"));
+		this.add(createShowButton("Add"));
 		this.add(createShowButton("Sales"));
 		this.add(createSignOutButton());
 		this.updateUI();
-
-		System.out.println("Inventory Nav");
 	}
 }
