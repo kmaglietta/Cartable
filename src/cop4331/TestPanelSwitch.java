@@ -22,10 +22,12 @@ public class TestPanelSwitch {
 		cards.add(new AvailableProdcutsPage(cardLayout, cards), "Available");
 		cards.add(new ProductPage(cardLayout, cards), "Product");
 		cards.add(new CartPage(cardLayout,cards), "Cart");
+		cards.add(new CheckoutPage1(cardLayout,cards), "CheckoutPage1");
 		
 		cardLayout.show(cards, "SignIn");
 		
 		frame.add(cards, BorderLayout.CENTER);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(500,500);
 		frame.setVisible(true);
 	}

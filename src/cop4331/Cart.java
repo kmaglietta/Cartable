@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Cart {
-	private int id;
 	private int uid;
 	private ArrayList<Product> products = new ArrayList<Product>();
-	private int total;
+	private double total;
 	
-	public Cart(int id,int uid, Iterator<Product> it){
-		setId(id);
+	public Cart(int uid, Iterator<Product> it){
 		setUid(uid);
 		setProducts(it);
 		setTotal();
@@ -19,6 +17,9 @@ public class Cart {
 	public void add(Product prod){
 		products.add(prod);
 		setTotal();
+	}
+	public boolean remove(Product prod){
+		return products.remove(prod);
 	}
 	
 	public Iterator<Product> getProducts(){
@@ -31,14 +32,6 @@ public class Cart {
 		}
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	private void setId(int id) {
-		this.id = id;
-	}
-
 	public int getUid() {
 		return uid;
 	}
@@ -47,7 +40,7 @@ public class Cart {
 		this.uid = uid;
 	}
 
-	public int getTotal() {
+	public double getTotal() {
 		setTotal();
 		return total;
 	}

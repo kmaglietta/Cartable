@@ -17,6 +17,7 @@ public class CustomerNavPanel extends JPanel{
 		this.add(new JLabel("Welcome "+Session.getInstance().getUser().getUsername()));
 		this.add(createShowButton("Available"));
 		this.add(createShowButton("Cart"));
+		this.add(new JLabel("$"+String.valueOf(Session.getInstance().getCart().getTotal())));
 		this.add(createSignOutButton());
 	}
 	
@@ -28,7 +29,6 @@ public class CustomerNavPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showPanel(string);
-				
 			}
 			
 		});

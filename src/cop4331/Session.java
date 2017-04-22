@@ -31,6 +31,10 @@ public class Session {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public int getUid(){
+		return this.user.getId();
+	}
 
 	public Product getProduct() {
 		return product;
@@ -41,8 +45,8 @@ public class Session {
 	}
 
 	public Cart getCart() {
-		if(user != null){
-			setCart(DatabaseInterface.getInstance().getUserCart(user.getId()));
+		if(user != null && cart == null){
+			setCart(DatabaseInterface.getInstance().getCart(user.getId()));
 		}
 		return cart;
 	}

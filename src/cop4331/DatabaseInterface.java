@@ -5,17 +5,18 @@ import java.util.Iterator;
 
 public class DatabaseInterface {
 	private static DatabaseInterface instance = null;
-	
+	File db_dir, users, products, carts, orders, temp;
 	protected DatabaseInterface() {
 		try {
-			File db_dir = new File("db/");
-			File users = new File("db/users.txt");
-			File products = new File("db/products.txt");
-			File carts = new File ("db/carts.txt");
-			File orders = new File ("db/oreders.txt");
+			db_dir = new File("db/");
+			users = new File("db/users.txt");
+			products = new File("db/products.txt");
+			carts = new File ("db/carts.txt");
+			orders = new File ("db/oreders.txt");
+			temp = new File ("db/temp.txt");
 			
 			if (db_dir.mkdirs()) {
-				if (users.createNewFile() && products.createNewFile() && carts.createNewFile() && orders.createNewFile()) {
+				if (users.createNewFile() && products.createNewFile() && carts.createNewFile() && orders.createNewFile() && temp.createNewFile()) {
 					System.out.println("Files created");
 				}
 				else {
@@ -43,7 +44,7 @@ public class DatabaseInterface {
 	}
 	
 	public User attemptLogin(String username, String password){
-		ArrayList<String[]> users = get("users");
+		ArrayList<String[]> users = get(this.users);
 		for(String[] user : users) {
 			if(user[1].equals(username)){
 				if(user[2].equals(password)){
@@ -58,7 +59,7 @@ public class DatabaseInterface {
 	public User addUser(String username, String password, int sellerFlag){
 		try{
 
-			ArrayList<String[]> users = get("users");
+			ArrayList<String[]> users = get(this.users);
 			FileWriter out = new FileWriter("db/users.txt",true);
 			BufferedWriter bw = new BufferedWriter(out);
 			int index = 0;
@@ -85,21 +86,58 @@ public class DatabaseInterface {
 		
 	}
 	
-	public Cart getUserCart(int uid){
+	public Cart getCart(int uid){
 		ArrayList<Product> cartItems = new ArrayList<Product>();
-		int id = 0;
-		for(String[] entity : get("carts")){
-			if(entity[1].equals(String.valueOf(uid))){
-				id = Integer.valueOf(entity[0]);
-				cartItems.add(getProduct(Integer.valueOf(entity[2])));
+		for(String[] entity : get(this.carts)){
+			if(entity[0].equals(String.valueOf(uid))){
+				cartItems.add(getProduct(Integer.valueOf(entity[1])));
 			}
 		}
-		return new Cart(id,uid,cartItems.iterator());
+		return new Cart(uid,cartItems.iterator());
+	}
+	
+	public void updateCartTabel(int uid, Cart cart){
+		try {
+			FileWriter out = new FileWriter(temp);
+			BufferedWriter bw = new BufferedWriter(out);
+			for(String[] entity : get(this.carts)){
+				if(!entity[0].equals(String.valueOf(uid))){
+					bw.write(entity[0]+","+entity[1]);
+					bw.newLine();
+				}
+			}
+			bw.close();
+			out.close();
+			this.carts.delete();
+			
+			out = new FileWriter(this.carts);
+			bw = new BufferedWriter(out);
+			
+			for(String[] entity : get(this.temp)){
+				bw.write(entity[0]+","+entity[1]);
+				bw.newLine();
+			}
+			
+			Iterator<Product> it = cart.getProducts();
+			Product prod = null;
+			while(it.hasNext()){
+				prod = it.next();
+				bw.write(String.valueOf(uid) + "," + String.valueOf(prod.getId()));
+				bw.newLine();
+			}
+			bw.close();
+			out.close();
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Iterator<Product> getProducts(){
 		ArrayList<Product> products = new ArrayList<Product>();
-		for(String[] entity : get("products")){
+		for(String[] entity : get(this.products)){
 			products.add(new Product(
 					Integer.valueOf(entity[0]),
 					Integer.valueOf(entity[1]),
@@ -143,9 +181,9 @@ public class DatabaseInterface {
 		return entities;
 	}
 	
-	private ArrayList<String[]> get(String file) {
+	private ArrayList<String[]> get(File file) {
 		try {
-			FileReader in = new FileReader("db/"+file+".txt");
+			FileReader in = new FileReader(file);
 			BufferedReader br = new BufferedReader(in);
 			return parse(br);
 		}

@@ -48,6 +48,10 @@ public class Page extends JPanel{
 	public void reset(){
 		this.removeAll();
 	}
+	public void refresh(){
+		this.setVisible(false);
+		this.setVisible(true);
+	}
 	public void showPanel(String name) {
 		cardLayout.show(cards, name);
 	}

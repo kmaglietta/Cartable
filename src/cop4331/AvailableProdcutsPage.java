@@ -1,8 +1,11 @@
 package cop4331;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import javax.swing.*;
@@ -20,27 +23,36 @@ public class AvailableProdcutsPage extends Page{
 		GridBagConstraints con = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
 		Iterator<Product> it = DatabaseInterface.getInstance().getProducts();	
-
-		con.gridx = 2;
+		Product prod = null;
+		
+		con.gridx = 0;
 		con.gridy = 0;
 		this.add(new CustomerNavPanel(super.getCardLayout(), super.getCards()), con);
-		
-		con.gridy = 2;
-		
-		con.gridx = 0;
-		this.add(new JLabel("Product"),con);
-		con.gridx = 1;
-		this.add(new JLabel("Description"),con);
-		con.gridx = 2;
-		this.add(new JLabel("Cost"),con);
-		con.gridx = 0;
 		while(it.hasNext()){
-			con.gridy ++;
-			con.ipady = 40;
-			//con.fill = con.HORIZONTAL;
-			con.gridwidth = 3;
-			this.add(new ProductPanel(it.next(), super.getCardLayout(), super.getCards()), con);
+			prod = it.next();
+			con.gridy++;
+			con.fill = GridBagConstraints.HORIZONTAL;
+			con.gridx = 0;
+			this.add(new ProductPanel(prod,super.getCardLayout(), super.getCards()),con);
+			con.gridx = 1;
+			this.add(createAddCartButton(prod), con);
 		}
 		this.updateUI();	
+	}
+	
+	private Component createAddCartButton(Product prod) {
+		JButton add = new JButton("Add To Cart");
+		add.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Session.getInstance().getCart().add(prod);
+				DatabaseInterface.getInstance().updateCartTabel(Session.getInstance().getUid(), Session.getInstance().getCart());
+				refresh();
+			}
+			
+		});
+		
+		return add;
 	}
 }

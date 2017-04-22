@@ -1,6 +1,8 @@
 package cop4331;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -29,7 +31,23 @@ public class ProductPage extends Page {
 		con.gridx = 0;
 		con.gridwidth = 2;
 		this.add(new JLabel(prod.getDescription()), con);
-		
+		this.add(createAddCartButton(prod));
 		this.updateUI();
+	}
+	
+	private Component createAddCartButton(Product prod) {
+		JButton add = new JButton("Add To Cart");
+		add.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Session.getInstance().getCart().add(prod);
+				DatabaseInterface.getInstance().updateCartTabel(Session.getInstance().getUid(), Session.getInstance().getCart());
+				showPanel("Cart");
+			}
+			
+		});
+		
+		return add;
 	}
 }
