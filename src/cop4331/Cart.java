@@ -21,7 +21,9 @@ public class Cart {
 	public boolean remove(Product prod){
 		return products.remove(prod);
 	}
-	
+	public void clear(){
+		products.clear();
+	}
 	public Iterator<Product> getProducts(){
 		return products.iterator();
 	}

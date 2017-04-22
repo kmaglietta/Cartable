@@ -50,7 +50,7 @@ public class CartPage extends Page{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				showPanel("CheckoutPage1");
+				showPanel("Checkout1");
 			}
 			
 		});

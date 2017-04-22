@@ -192,5 +192,27 @@ public class DatabaseInterface {
 			return null;
 		}
 	}
+
+	public void setOrder(int id, Iterator<Product> products) {
+		try{
+			FileWriter out = new FileWriter(orders);
+			BufferedWriter bw = new BufferedWriter(out);
+			Product prod = null;
+			
+			while(products.hasNext()){
+				prod = products.next();
+				bw.write(id + "," + prod.getSid() + "," + prod.getId());
+				bw.newLine();
+			}
+			
+			
+			bw.close();
+			out.close();
+		}
+		catch(IOException e){
+			
+		}
+		
+	}
 	
 }
