@@ -29,6 +29,7 @@ public class Application {
 		cards.add(new CheckoutPage2(cardLayout,cards), "Checkout2");
 		cards.add(new InventoryPage(cardLayout,cards), "Inventory");
 		cards.add(new SalesPage(cardLayout,cards), "Sales");
+		cards.add(new AddProductPage(cardLayout,cards),"Add");
 		
 		//App's Initial view starts at the SignIn screen
 		cardLayout.show(cards, "SignIn");

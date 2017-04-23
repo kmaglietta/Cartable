@@ -400,7 +400,6 @@ public class DatabaseInterface {
 			products_bw.write("4,2,Shirt,Crew Red,5.55,2.04");
 			products_bw.newLine();
 			products_bw.write("5,2,PearWatch,Looks lika an AppleWatch,1.00,0.50");
-			products_bw.newLine();
 			
 			users_bw.close();
 			products_bw.close();

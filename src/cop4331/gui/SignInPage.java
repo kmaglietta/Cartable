@@ -104,7 +104,6 @@ public class SignInPage extends JPanel{
 				//See if all fields are filled
 				for(String s : fieldText){
 					if(s.equals("")) {
-						System.out.println(s);
 						valid = false;
 						error = "empty";
 					}
