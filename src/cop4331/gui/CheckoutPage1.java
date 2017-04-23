@@ -8,14 +8,23 @@ import javax.swing.*;
 import cop4331.singles.DatabaseInterface;
 import cop4331.singles.Session;
 
+/**<h1>CheckoutPage1</h1>
+ * Displays the payment information form
+ * @author */
 @SuppressWarnings("serial")
 public class CheckoutPage1 extends Page {
-
+	
+	/**<h1>constructor</h1>
+	 * Uses the constructor from Page
+	 * @author */
 	public CheckoutPage1(CardLayout cardLayout, JPanel cards) {
 		super(cardLayout, cards);
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**<h1>display</h1>
+	 * Displays the actual elements in the page
+	 * @author */
 	@Override
 	public void display(){
 		GridBagConstraints con = new GridBagConstraints();
@@ -59,18 +68,23 @@ public class CheckoutPage1 extends Page {
 		this.add(createCheckoutButton(),con);
 		this.updateUI();
 	}
-
+	
+	/**<h1>createCheckoutButton</h1>
+	 * @return JButton for checking out
+	 * @author */
 	private Component createCheckoutButton() {
 		JButton checkout = new JButton("Checkout");
 		checkout.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//Set the order in the database with all items in the cart
 				DatabaseInterface.getInstance().setOrder(
 						Session.getInstance().getUser().getId(),
 						Session.getInstance().getCart().getProducts());
 				Session.getInstance().getCart().clear();
 				DatabaseInterface.getInstance().updateCartTabel(Session.getInstance().getUid(), Session.getInstance().getCart());
+				//Show the second checkout page
 				showPanel("Checkout2");
 			}
 			

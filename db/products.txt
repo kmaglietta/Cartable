@@ -1,2 +1,6 @@
-0,0,Shirt,Nice comfortable slim fit,2.00,1.50
-1,0,Shoes,Brown,3.00,1.50
+0,1,Socks,White tube socks,4.30,2.55
+1,1,Shirt,V-neck Bule,9.99,1.04
+2,1,Watch,Invicta gold face,498.98,3.00
+3,2,Socks,Black tube socks,3.30,1.55
+4,2,Shirt,Crew Red,5.55,2.04
+5,2,PearWatch,Looks lika an AppleWatch,1.00,0.50

@@ -10,13 +10,23 @@ import cop4331.data.Product;
 import cop4331.singles.DatabaseInterface;
 import cop4331.singles.Session;
 
+/**<h1>ProductPage</h1>
+ * Displays all product information
+ * @author */
 @SuppressWarnings("serial")
 public class ProductPage extends Page {
 	
+	/**<h1>constructor</h1>
+	 * Uses the super class constructor from Page
+	 * @author */
 	public ProductPage(CardLayout cardLayout, JPanel cards) {
 		super(cardLayout, cards);
 		// TODO Auto-generated constructor stub
 	}
+	
+	/**<h1>display</h1>
+	 * Displays the actual elements in the page
+	 * @author */
 	@Override
 	public void display(){
 		GridBagConstraints con = new GridBagConstraints();
@@ -39,6 +49,9 @@ public class ProductPage extends Page {
 		this.updateUI();
 	}
 	
+	/**<h1>createAddCartButton</h1>
+	 * @return a JButton that on click adds the product to the users cart
+	 * @author */
 	private Component createAddCartButton(Product prod) {
 		JButton add = new JButton("Add To Cart");
 		add.addActionListener(new ActionListener(){

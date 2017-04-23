@@ -11,13 +11,22 @@ import cop4331.data.Product;
 import cop4331.singles.DatabaseInterface;
 import cop4331.singles.Session;
 
+/**<h1>InventoryPage</h1>
+ * Displays all the products owned by the seller
+ * @author */
 @SuppressWarnings("serial")
 public class InventoryPage extends Page {
-
+	
+	/**<h1>constructor</h1>
+	 * Uses the constructor from Page
+	 * @author */
 	public InventoryPage(CardLayout cardLayout, JPanel cards) {
 		super(cardLayout, cards);
 	}
 	
+	/**<h1>display</h1>
+	 * Displays the actual elements in the page
+	 * @author */
 	public void display(){
 		GridBagConstraints con = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
@@ -37,7 +46,10 @@ public class InventoryPage extends Page {
 		}
 		this.updateUI();
 	}
-
+	
+	/**<h1>createEditButton</h1>
+	 * Generates a button to edit a product
+	 * @author */
 	private Component createEditButton(Product prod) {
 		JButton edit = new JButton("Edit");
 		

@@ -5,6 +5,9 @@ import cop4331.data.Order;
 import cop4331.data.Product;
 import cop4331.data.User;
 
+/**<h1>Session</h1>
+ * Holds data for pages to easily access and pass between eachother
+ * @author */
 public class Session {
 	private static Session instance = null;
 	private User user = null;
@@ -16,6 +19,9 @@ public class Session {
 		
 	}
 	
+	/**<h1>getInstance</h1>
+	 * @return the instance of the Session
+	 * @author */
 	public static Session getInstance() {
 		if (instance == null) {
 			instance = new Session();
@@ -24,10 +30,14 @@ public class Session {
 		return instance;
 	}
 	
+	/**<h1>clear</h1>
+	 * Clears the session data. Used for sign out
+	 * @author */
 	public void clear() {
 		setUser(null);
 		setProduct(null);
 		setCart(null);
+		setOrder(null);
 	}
 
 	public User getUser() {
@@ -49,7 +59,10 @@ public class Session {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
+	
+	/**<h1>getCart</h1>
+	 * Used to retrieve the cart of the user
+	 * @author */
 	public Cart getCart() {
 		if(user != null && cart == null){
 			setCart(DatabaseInterface.getInstance().getCart(user.getId()));

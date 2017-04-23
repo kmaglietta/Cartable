@@ -1,5 +1,8 @@
 package cop4331.data;
 
+/**<h1>Product</h1>
+ * Manages the data relates to a product
+ * @author */
 public class Product {
 	private int id, sid;
 	private String name, description;
@@ -15,7 +18,8 @@ public class Product {
 		
 		//stroe product in db
 	}
-
+	
+	//Auto generated getter/setter methods
 	public int getId() {
 		return id;
 	}

@@ -11,8 +11,16 @@ import cop4331.data.Product;
 import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
+/**<h1>ProductPanel</h1>
+ * A nice little panel that other Components can add to show a product
+ * @author */
 public class ProductPanel extends JPanel{
 	Product prod;
+	
+	/**<h1>constructor</h1>
+	 * Sets the card layout,cards,product<br>
+	 * Adds a mouse listener the on-click shows the productpage of the product!
+	 * @author */
 	public ProductPanel(Product prod, CardLayout cardLayout, JPanel cards){
 		this.prod = prod;
 		

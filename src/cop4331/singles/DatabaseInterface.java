@@ -29,6 +29,7 @@ public class DatabaseInterface {
 			
 			if (db_dir.mkdirs()) {
 				if (users.createNewFile() && products.createNewFile() && carts.createNewFile() && orders.createNewFile() && temp.createNewFile()) {
+					createTestData();
 					System.out.println("Files created");
 				}
 				else {
@@ -366,6 +367,46 @@ public class DatabaseInterface {
 		catch (IOException e) {
 			System.out.println("No such table exisits");
 			return null;
+		}
+	}
+	
+	/**<h1>createTestData</h1>
+	 * Fills the db with test data so the grader can see things
+	 * */
+	private void createTestData(){
+		try{
+			FileWriter users_fw = new FileWriter(this.users);
+			BufferedWriter users_bw = new BufferedWriter(users_fw);
+			FileWriter products_fw = new FileWriter(this.products);
+			BufferedWriter products_bw = new BufferedWriter(products_fw);
+			
+			users_bw.write("0,grader,pass,0");
+			users_bw.newLine();
+			users_bw.write("1,seller1,pass,1");
+			users_bw.newLine();
+			users_bw.write("2,seller2,pass,1");
+			users_bw.newLine();
+			users_bw.write("0,customer,pass,0");
+			users_bw.newLine();
+			
+			products_bw.write("0,1,Socks,White tube socks,4.30,2.55");
+			products_bw.newLine();
+			products_bw.write("1,1,Shirt,V-neck Bule,9.99,1.04");
+			products_bw.newLine();
+			products_bw.write("2,1,Watch,Invicta gold face,498.98,3.00");
+			products_bw.newLine();
+			products_bw.write("3,2,Socks,Black tube socks,3.30,1.55");
+			products_bw.newLine();
+			products_bw.write("4,2,Shirt,Crew Red,5.55,2.04");
+			products_bw.newLine();
+			products_bw.write("5,2,PearWatch,Looks lika an AppleWatch,1.00,0.50");
+			products_bw.newLine();
+			
+			users_bw.close();
+			products_bw.close();
+		}
+		catch(IOException e){
+			
 		}
 	}
 	
