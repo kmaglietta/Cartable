@@ -1,4 +1,4 @@
-package cop4331;
+package cop4331.gui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +6,10 @@ import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import cop4331.data.Product;
+import cop4331.singles.DatabaseInterface;
+import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
 public class InventoryPage extends Page {

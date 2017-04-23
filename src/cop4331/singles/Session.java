@@ -1,4 +1,9 @@
-package cop4331;
+package cop4331.singles;
+
+import cop4331.data.Cart;
+import cop4331.data.Order;
+import cop4331.data.Product;
+import cop4331.data.User;
 
 public class Session {
 	private static Session instance = null;

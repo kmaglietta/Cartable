@@ -1,8 +1,10 @@
-package cop4331;
+package cop4331.gui;
 
 import java.awt.*;
 
 import javax.swing.*;
+
+import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
 public class CustomerNavPanel extends NavPanel{

@@ -1,4 +1,4 @@
-package cop4331;
+package cop4331.gui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +6,9 @@ import java.awt.event.*;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import cop4331.data.Product;
+import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
 public class ProductPanel extends JPanel{

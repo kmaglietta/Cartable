@@ -1,4 +1,4 @@
-package cop4331;
+package cop4331.gui;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package cop4331;
+package cop4331.gui;
 
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import javax.swing.*;
+
+import cop4331.data.Product;
+import cop4331.singles.DatabaseInterface;
+import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
 public class AvailableProdcutsPage extends Page{

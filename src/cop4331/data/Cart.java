@@ -1,4 +1,4 @@
-package cop4331;
+package cop4331.data;
 
 import java.util.ArrayList;
 import java.util.Iterator;

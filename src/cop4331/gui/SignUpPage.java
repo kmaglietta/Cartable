@@ -1,10 +1,14 @@
-package cop4331;
+package cop4331.gui;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import cop4331.data.User;
+import cop4331.singles.DatabaseInterface;
+import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
 /**<h1>SignUpPage</h1>

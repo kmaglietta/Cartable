@@ -1,4 +1,4 @@
-package cop4331;
+package cop4331.data;
 
 public class Product {
 	private int id, sid;

@@ -1,9 +1,12 @@
-package cop4331;
+package cop4331.gui;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+
+import cop4331.singles.DatabaseInterface;
+import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
 public class CheckoutPage1 extends Page {

@@ -1,4 +1,4 @@
-package cop4331;
+package cop4331.gui;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
 public class NavPanel extends JPanel {

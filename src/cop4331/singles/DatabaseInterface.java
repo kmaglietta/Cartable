@@ -1,7 +1,12 @@
-package cop4331;
+package cop4331.singles;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import cop4331.data.Cart;
+import cop4331.data.Order;
+import cop4331.data.Product;
+import cop4331.data.User;
 /**<h1>DatabaseInterface</h1>
  * Handles the operations between the application and db/files*/
 public class DatabaseInterface {
@@ -109,7 +114,7 @@ public class DatabaseInterface {
 	 * */
 	public void setOrder(int id, Iterator<Product> products) {
 		try{
-			FileWriter out = new FileWriter(orders);
+			FileWriter out = new FileWriter(orders,true);
 			BufferedWriter bw = new BufferedWriter(out);
 			Product prod = null;
 			
