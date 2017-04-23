@@ -30,6 +30,7 @@ public class Application {
 		cards.add(new InventoryPage(cardLayout,cards), "Inventory");
 		cards.add(new SalesPage(cardLayout,cards), "Sales");
 		cards.add(new AddProductPage(cardLayout,cards),"Add");
+		cards.add(new UpdateProductPage(cardLayout,cards),"Edit");
 		
 		//App's Initial view starts at the SignIn screen
 		cardLayout.show(cards, "SignIn");

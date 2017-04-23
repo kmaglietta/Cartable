@@ -170,6 +170,10 @@ public class SignUpPage extends JPanel{
 					//Show the lame customer to the products they can buy
 					else showPanel("Available");
 				}
+				
+				for(TextField tf : fields){
+					tf.setText("");
+				}
 			}
 			
 		});

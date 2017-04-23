@@ -1,4 +1,0 @@
-0,grader,pass,0
-1,seller1,pass,1
-2,seller2,pass,1
-0,customer,pass,0

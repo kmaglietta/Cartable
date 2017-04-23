@@ -10,16 +10,21 @@ import cop4331.singles.DatabaseInterface;
 import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
-public class AddProductPage extends Panel {
+public class AddProductPage extends Page {
 	private CardLayout cardLayout;
 	private JPanel cards;
 	private ArrayList<String> fieldText = new ArrayList<String>();
 	private ArrayList<TextField> fields = new ArrayList<TextField>();
 	
 	public AddProductPage(CardLayout cardLayout, JPanel cards){
-		this.cardLayout = cardLayout;
-		this.cards = cards;
-		
+		super(cardLayout, cards);
+	}
+	
+	/**<h1>display</h1>
+	 * Displays the actual elements in the page
+	 * @author */
+	@Override
+	public void display(){
 		GridBagConstraints con = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
 		
@@ -61,6 +66,17 @@ public class AddProductPage extends Panel {
 		con.gridy++;
 		con.gridy++;
 		this.add(createAddButton(),con);
+		this.updateUI();
+	}
+	
+	/**<h1>reset</h1>
+	 * Removes all elements
+	 * @author */
+	@Override
+	public void reset(){
+		this.fieldText.clear();
+		this.fields.clear();
+		this.removeAll();
 	}
 	
 	/**<h1>createCheckoutButton</h1>
@@ -91,7 +107,6 @@ public class AddProductPage extends Panel {
 								fieldText.get(1), 
 								Double.valueOf(fieldText.get(3)), 
 								Double.valueOf(fieldText.get(2)));
-						clearFields();
 						showPanel("Inventory");
 					}
 					catch (NumberFormatException ex){
@@ -111,20 +126,6 @@ public class AddProductPage extends Panel {
 		return add;
 	}
 	
-	/**<h1>showPanel</h1>
-	 * Makes switching Pages simpler by using a stirring to determine the required page
-	 * */
-	private void showPanel(String name) {
-		cardLayout.show(cards, name);
-	}
-	
-	/**<h1>generatePopUp</h1>
-	 * Generates a message dialog using the passed message
-	 * @author */
-	private void generatePopUp(String mes) {
-		JOptionPane.showMessageDialog(this, mes);
-	}
-	
 	/**<h1>getText</h1>
 	 * Get the text from all the TextFeilds
 	 * @author */
@@ -132,12 +133,6 @@ public class AddProductPage extends Panel {
 		fieldText.clear();
 		for(TextField tf : fields) {
 			fieldText.add(tf.getText());
-		}
-	}
-	
-	private void clearFields(){
-		for(TextField f : fields){
-			f.setText("");
 		}
 	}
 }

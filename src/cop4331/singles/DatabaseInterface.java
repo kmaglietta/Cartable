@@ -94,8 +94,8 @@ public class DatabaseInterface {
 				}
 				index++;
 			}
-			bw.newLine();
 			bw.write(index+","+username+","+password+","+sellerFlag);
+			bw.newLine();
 			
 			bw.close();
 			out.close();

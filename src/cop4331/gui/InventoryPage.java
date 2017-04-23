@@ -58,6 +58,8 @@ public class InventoryPage extends Page {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Edit Product: "+prod.getName());
+				Session.getInstance().setProduct(prod);
+				showPanel("Edit");
 			}
 			
 		});
