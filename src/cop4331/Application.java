@@ -5,18 +5,21 @@ import java.awt.CardLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+/**<h1>Application</h1>
+ * The application main
+ * @author */
+public class Application {
 
-public class TestPanelSwitch {
 	static CardLayout cardLayout = new CardLayout();
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		//Create the fame to hold everything
 		JFrame frame = new JFrame("Cartable");
 		frame.setLayout(new BorderLayout());
 		JPanel cards = new JPanel(cardLayout);
 		cards.setSize(500,500);
 		
+		//Add all the pages with labels
 		cards.add(new SignInPage(cardLayout, cards), "SignIn");
 		cards.add(new SignUpPage(cardLayout, cards), "SignUp");
 		cards.add(new AvailableProdcutsPage(cardLayout, cards), "Available");
@@ -27,12 +30,13 @@ public class TestPanelSwitch {
 		cards.add(new InventoryPage(cardLayout,cards), "Inventory");
 		cards.add(new SalesPage(cardLayout,cards), "Sales");
 		
+		//App's Initial view starts at the SignIn screen
 		cardLayout.show(cards, "SignIn");
 		
+		//Wrap everything up!
 		frame.add(cards, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(500,500);
 		frame.setVisible(true);
 	}
-
 }
