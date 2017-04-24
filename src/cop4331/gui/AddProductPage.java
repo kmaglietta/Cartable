@@ -11,8 +11,6 @@ import cop4331.singles.Session;
 
 @SuppressWarnings("serial")
 public class AddProductPage extends Page {
-	private CardLayout cardLayout;
-	private JPanel cards;
 	private ArrayList<String> fieldText = new ArrayList<String>();
 	private ArrayList<TextField> fields = new ArrayList<TextField>();
 	
@@ -36,7 +34,7 @@ public class AddProductPage extends Page {
 		//Add nav-bar
 		con.gridx = 0;
 		con.gridy = 0;
-		this.add(new SellerNavPanel(this.cardLayout, this.cards));
+		this.add(new SellerNavPanel(super.getCardLayout(), super.getCards()));
 		
 		//Generate the form
 		con.gridy++;
